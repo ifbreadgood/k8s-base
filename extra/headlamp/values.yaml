@@ -10,5 +10,5 @@ headlamp:
   config:
     oidc:
       clientID: "kubernetes"
-      clientSecret: c8E3XscWQko25un2ob5CZzCyuOM97Nck
-      issuerURL: https://keycloak.trial.studio/realms/onprem
+      clientSecret: ""
+      issuerURL: ""
