@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: testing
+  annotations:
+    workflows.argoproj.io/description: |
+      simple description
+spec:
+  serviceAccountName: operate-workflow-sa
+  entrypoint: this
+  templates:
+    - name: this
+      steps:
+        - - name: one
+            template: checkout
+        - - name: two
+            template: echo-one
+    - name: echo-one
+      container:
+        name: bb
+        image: busybox
+        command:
+          - echo
+        args:
+          - one
+    - name: checkout
+      inputs:
+        artifacts:
+          - name: source
+            path: /src
+            git:
+              repo: "https://gitea.trial.studio/gitea-admin/tf-module-vault"
+              revision: "main"
+              depth: 1
+              disableSubmodules: true
+      outputs:
+        artifacts:
+          - name: source
+            path: /src
+
+      container:
+        name: bb
+        image: busybox
+        command:
+          - ls
+          - -lR
+          - /src

@@ -1,0 +1,26 @@
+argo-workflows:
+  server:
+    authMode: sso
+    sso:
+      enabled: true
+      issuer: https://keycloak.trial.studio/realms/onprem
+      clientId:
+        name: oidc-secret
+        key: id
+      clientSecret:
+        name: oidc-secret
+        key: secret
+      rbac:
+        enabled: true
+#      userInfoPath: "https://keycloak.trial.studio/realms/onprem/protocol/openid-connect/userinfo"
+  artifactRepository:
+    s3:
+      bucket: argo-workflows
+      endpoint: minio-api.trial.studio
+      insecure: false
+      accessKeySecret:
+        name: minio-secret
+        key: access_key
+      secretKeySecret:
+        name: minio-secret
+        key: secret_key

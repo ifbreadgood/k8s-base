@@ -1,0 +1,94 @@
+mimir-distributed:
+  minio:
+    enabled: false
+
+  alertmanager:
+    enabled: false
+
+  overrides_exporter:
+    enabled: false
+
+  query_scheduler:
+    enabled: false
+
+  query_frontend:
+    persistence:
+      enabled: false
+
+  compactor:
+    persistentVolume:
+      enabled: false
+      storageClass: openebs-hostpath
+
+  ingester:
+    zoneAwareReplication:
+      enabled: false
+    persistentVolume:
+      enabled: false
+      storageClass: openebs-hostpath
+
+  store_gateway:
+    zoneAwareReplication:
+      enabled: false
+    persistentVolume:
+      enabled: false
+      storageClass: openebs-hostpath
+
+  global:
+    extraEnvFrom:
+      - secretRef:
+          name: mimir-storage
+
+  mimir:
+    config: |
+      usage_stats:
+        enabled: false
+      
+      activity_tracker:
+        filepath: /active-query-tracker/activity.log
+      
+      common:
+        storage:
+          backend: s3
+          s3:
+            endpoint: "${endpoint}"
+            region: "${s3_region}"
+            secret_access_key: "${secret_key}"
+            access_key_id: "${access_key}"
+
+      memberlist:
+        abort_if_cluster_join_fails: false
+        compression_enabled: false
+        join_members:
+        - dns+{{ include "mimir.fullname" . }}-gossip-ring.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}:{{ include "mimir.memberlistBindPort" . }}
+
+      ruler:
+        alertmanager_url: dnssrvnoa+http://_http-metrics._tcp.{{ template "mimir.fullname" . }}-alertmanager-headless.{{ .Release.Namespace }}.svc.{{ .Values.global.clusterDomain }}/alertmanager
+        enable_api: true
+        rule_path: /data
+
+      compactor:
+        data_dir: "/data"
+      
+      limits:
+        compactor_blocks_retention_period: 4w
+
+      frontend_worker:
+        frontend_address: {{ template "mimir.fullname" . }}-query-frontend-headless.{{ .Release.Namespace }}.svc:{{ include "mimir.serverGrpcListenPort" . }}
+      
+      blocks_storage:
+        bucket_store:
+          sync_dir: /data/tsdb-sync
+        s3:
+          bucket_name: mimir-block-storage
+        tsdb:
+          dir: /data/tsdb
+
+      alertmanager_storage:
+        s3:
+          bucket_name: mimir-alertmanager
+
+      ruler_storage:
+        backend: s3
+        s3:
+          bucket_name: mimir-ruler

@@ -1,0 +1,94 @@
+grafana:
+  replicas: 1
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - grafana.trial.studio
+    tls:
+      - hosts:
+          - grafana.trial.studio
+        secretName: grafana-cm-tls
+
+#  envFromSecrets:
+#    - name: grafana-cnpg-app
+#      optional: false
+#    - name: grafana-oidc
+#      optional: false
+#  sidecar:
+#    alerts:
+#      enabled: true
+#    dashboards:
+#      enabled: true
+#    datasources:
+#      enabled: true
+#    notifiers:
+#      enabled: true
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki-gateway.loki
+          jsonData:
+            maxLines: 5000
+#        - name: Mimir
+#          type: prometheus
+#          access: proxy
+#          url: http://mimir-nginx.mimir/prometheus
+#          isDefault: true
+        - name: Tempo
+          type: tempo
+          access: proxy
+          url: http://tempo.tempo:3100
+
+  grafana.ini:
+    server:
+      domain: grafana.trial.studio
+      root_url: https://grafana.trial.studio
+      enforce_domain: true
+      enable_gzip: true
+    analytics:
+      reporting_enabled: false
+      check_for_updates: true
+      check_for_plugin_updates: true
+      feedback_links_enabled: false
+    security:
+#      disable_initial_admin_creation: true
+      disable_gravatar: true
+      cookie_secure: true
+      strict_transport_security: true
+      content_security_policy: true
+#    database:
+#      type: postgres
+#      host: ${host}:${port}
+#      name: ${dbname}
+#      user: ${username}
+#      password: ${password}
+    dashboards:
+      min_refresh_interval: 15s
+    users:
+      viewers_can_edit: true
+#    auth:
+#      disable_login_form: true
+#    auth.generic_oauth:
+#      name: oidc
+#      icon: ${oidc-url-icon}
+#      enabled: true
+#      allow_sign_up: true
+#      client_id: ${oidc-id}
+#      client_secret: ${oidc-secret}
+#      scopes: openid profile groups email
+#      auth_url: ${oidc-url-authorize}
+#      token_url: ${oidc-url-token}
+#      api_url: ${oidc-url-userinfo}
+#      allow_assign_grafana_admin: true
+#      role_attribute_path: contains(groups[*], 'site-reliability-engineer') && 'GrafanaAdmin' || 'Viewer'
+    log:
+      mode: console
+    log.console:
+      level: debug

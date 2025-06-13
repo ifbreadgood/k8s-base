@@ -1,0 +1,45 @@
+{{ if .Capabilities.APIVersions.Has "postgresql.cnpg.io/v1" }}
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: grafana-cnpg
+spec:
+  instances: 2
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 5Gi
+    storageClass: openebs-hostpath
+  bootstrap:
+    initdb:
+      # use it to generate a user that can create users with access to only the application database
+      postInitApplicationSQLRefs:
+        secretRefs:
+          - key: init-sql
+            name: grafana-cnpg
+      owner: grafana
+      database: grafana
+      dataChecksums: true
+
+  backup:
+    retentionPolicy: "7d"
+    barmanObjectStore:
+      wal:
+        compression: gzip
+#        encryption: AES256
+        maxParallel: 4
+      data:
+        compression: gzip
+#        encryption: AES256
+      destinationPath: "s3://grafana-cnpg-backup"
+      endpointURL: "http://minio-api.trial.studio"
+      s3Credentials:
+        region:
+          key: aws-region
+          name: grafana-cnpg
+        accessKeyId:
+          key: access-key
+          name: grafana-cnpg
+        secretAccessKey:
+          key: secret-key
+          name: grafana-cnpg
+{{ end }}

@@ -1,0 +1,50 @@
+#tempo-distributed:
+#  reportingEnabled: false
+#
+#  ingester:
+#    extraArgs:
+#      - '-config.expand-env=true'
+#    extraEnvFrom:
+#      - secretRef:
+#          name: tempo
+#
+#  queryFrontend:
+#    extraArgs:
+#      - '-config.expand-env=true'
+#    extraEnvFrom:
+#      - secretRef:
+#          name: tempo
+#
+#  distributor:
+#    extraArgs:
+#      - '-config.expand-env=true'
+#    extraEnvFrom:
+#      - secretRef:
+#          name: tempo
+#
+#  querier:
+#    extraArgs:
+#      - '-config.expand-env=true'
+#    extraEnvFrom:
+#      - secretRef:
+#          name: tempo
+#
+#  gateway:
+#    enabled: true
+#
+#  compactor:
+#    extraArgs:
+#      - '-config.expand-env=true'
+#    extraEnvFrom:
+#      - secretRef:
+#          name: tempo
+#
+#  storage:
+#    trace:
+#      backend: s3
+#      s3:
+#        bucket: tempo
+#        endpoint: "${endpoint}"
+#        region: "${s3_region}"
+#        access_key: "${access_key}"
+#        secret_key: "${secret_key}"
