@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: &name cert-manager
 spec:
-  source:
+  sources:
     - repoURL: https://charts.jetstack.io
       chart: *name
       targetRevision: v1.18.2
