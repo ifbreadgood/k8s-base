@@ -3,10 +3,16 @@ kind: Application
 metadata:
   name: &name argo-rollouts
 spec:
-  source:
-    repoURL: https://argoproj.github.io/argo-helm
-    chart: *name
-    targetRevision: 2.39.6
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: *name
+      targetRevision: 2.39.6
+      helm:
+        valueFiles:
+          - $values/manifests-values/argo-rollouts/values.yaml
+    - repoURL: https://github.com/ifbreadgood/k8s-base
+      targetRevision: HEAD
+      ref: values
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name

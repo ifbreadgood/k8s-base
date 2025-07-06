@@ -4,7 +4,7 @@ metadata:
   name: &name argo-cd
 spec:
   sources:
-    - repoURL: oci://ghcr.io/argoproj/argo-helm/argo-cd
+    - repoURL: https://argoproj.github.io/argo-helm
       chart: *name
       targetRevision: 8.1.2
       helm:
