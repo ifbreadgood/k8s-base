@@ -1,0 +1,2 @@
+localprovisioner:
+  basePath: /var/local-mount

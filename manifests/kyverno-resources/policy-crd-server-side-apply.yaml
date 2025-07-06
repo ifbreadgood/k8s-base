@@ -1,0 +1,16 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: crd-server-side-apply
+spec:
+  rules:
+    - name: set-crd-server-side-apply
+      match:
+        resources:
+          kinds:
+            - CustomResourceDefinition
+      mutate:
+        patchStrategicMerge:
+          metadata:
+            annotations:
+              argocd.argoproj.io/sync-options: Replace=false,ServerSideApply=true

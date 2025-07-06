@@ -1,21 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: &name argo-cd
+  name: &name kyverno
 spec:
   sources:
-    - repoURL: oci://ghcr.io/argoproj/argo-helm/argo-cd
+    - repoURL: https://kyverno.github.io/kyverno/
       chart: *name
-      targetRevision: 8.1.2
+      targetRevision: 1.14.4
       helm:
         valueFiles:
-          - $values/manifests-values/argo-cd/values.yaml
+          - $values/manifests-values/kyverno/values.yaml
     - repoURL: https://github.com/ifbreadgood/k8s-base
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/ifbreadgood/k8s-base
-      targetRevision: HEAD
-      path: manifests/argo-cd-resources
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name

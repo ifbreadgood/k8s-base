@@ -1,21 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: &name argo-cd
+  name: &name kube-prometheus-stack
 spec:
   sources:
-    - repoURL: oci://ghcr.io/argoproj/argo-helm/argo-cd
+    - repoURL: https://prometheus-community.github.io/helm-charts
       chart: *name
-      targetRevision: 8.1.2
+      targetRevision: 75.9.0
       helm:
         valueFiles:
-          - $values/manifests-values/argo-cd/values.yaml
+          - $values/manifests-values/kube-prometheus-stack/values.yaml
     - repoURL: https://github.com/ifbreadgood/k8s-base
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/ifbreadgood/k8s-base
-      targetRevision: HEAD
-      path: manifests/argo-cd-resources
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name

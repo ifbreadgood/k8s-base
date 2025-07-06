@@ -1,21 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: &name argo-cd
+  name: &name argo-rollouts
 spec:
-  sources:
-    - repoURL: oci://ghcr.io/argoproj/argo-helm/argo-cd
-      chart: *name
-      targetRevision: 8.1.2
-      helm:
-        valueFiles:
-          - $values/manifests-values/argo-cd/values.yaml
-    - repoURL: https://github.com/ifbreadgood/k8s-base
-      targetRevision: HEAD
-      ref: values
-    - repoURL: https://github.com/ifbreadgood/k8s-base
-      targetRevision: HEAD
-      path: manifests/argo-cd-resources
+  source:
+    repoURL: https://argoproj.github.io/argo-helm
+    chart: *name
+    targetRevision: 2.39.6
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name
