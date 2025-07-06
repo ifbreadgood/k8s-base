@@ -4,9 +4,9 @@ metadata:
   name: &name cilium
 spec:
   sources:
-    - repoURL: https://charts.jetstack.io
+    - repoURL: https://helm.cilium.io/
       chart: *name
-      targetRevision: v1.18.2
+      targetRevision: v1.17.5
       helm:
         valueFiles:
           - $values/manifests-values/cilium/values.yaml
