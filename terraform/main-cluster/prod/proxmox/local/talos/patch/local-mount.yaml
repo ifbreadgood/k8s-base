@@ -1,0 +1,14 @@
+#- op: add
+#  path: /machine/install/extensions
+#  value:
+#    - image: ghcr.io/siderolabs/iscsi-tools:v0.1.4
+- op: add
+  path: /machine/kubelet/extraMounts
+  value:
+    - destination: /var/local-mount
+      type: bind
+      source: /var/local-mount
+      options:
+        - bind
+        - rshared
+        - rw

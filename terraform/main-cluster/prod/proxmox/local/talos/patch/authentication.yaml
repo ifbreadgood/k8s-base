@@ -1,0 +1,9 @@
+cluster:
+  apiServer:
+    extraArgs:
+      oidc-issuer-url: https://keycloak.trial.studio/realms/onprem
+      oidc-client-id: kubernetes
+      oidc-username-claim: preferred_username
+      oidc-username-prefix: "keycloak:"
+      oidc-groups-claim: groups
+      oidc-groups-prefix: "keycloak:"

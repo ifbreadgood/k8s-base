@@ -1,0 +1,16 @@
+cluster:
+  apiServer:
+    admissionControl:
+      - name: PodSecurity # Name is the name of the admission controller.
+        configuration:
+          exemptions:
+            namespaces:
+              - openebs
+              - metallb
+              - vault
+              - cilium
+              - k8s-monitoring
+              - istio-system
+              - unrestricted
+              - kube-prometheus-stack
+              - grafana-alloy

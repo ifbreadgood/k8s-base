@@ -1,0 +1,11 @@
+# for piraeus operator
+machine:
+  install:
+    extensions:
+      - image: ghcr.io/siderolabs/drbd:9.2.4-v1.5.5
+  kernel:
+    modules:
+      - name: drbd
+        parameters:
+          - usermode_helper=disabled
+      - name: drbd_transport_tcp

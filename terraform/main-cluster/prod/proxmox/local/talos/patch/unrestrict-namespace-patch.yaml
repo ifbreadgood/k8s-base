@@ -1,0 +1,9 @@
+cluster:
+  apiServer:
+    admissionControl:
+      - name: PodSecurity
+        configuration:
+          exemptions:
+            # adding same namespace will "crash" the cluster
+            namespaces:
+              - grafana-alloy

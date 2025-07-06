@@ -1,0 +1,10 @@
+- op: add
+  path: /machine/kubelet/extraMounts
+  value:
+    - destination: /var/disk/local
+      type: bind
+      source: /var/disk/local
+      options:
+        - bind
+        - rshared
+        - rw

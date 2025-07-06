@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: &name cilium
+spec:
+  sources:
+    - repoURL: https://helm.cilium.io/
+      chart: *name
+      targetRevision: v1.17.5
+      helm:
+        valueFiles:
+          - $values/kubernetes/helm-values/cilium/values.yaml
+    - repoURL: https://github.com/ifbreadgood/k8s-base
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ifbreadgood/k8s-base
+      targetRevision: HEAD
+      path: kubernetes/manifests/cilium
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: *name
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s
+        factor: 2
+        maxDuration: 3m
