@@ -1,2 +1,13 @@
 localprovisioner:
   basePath: /var/local-mount
+loki:
+  enabled: false
+alloy:
+  enabled: false
+engines:
+  local:
+    zfs:
+      enabled: false
+  replicated:
+    mayastor:
+      enabled: false
