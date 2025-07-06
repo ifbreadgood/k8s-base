@@ -13,6 +13,9 @@ spec:
     - repoURL: https://github.com/ifbreadgood/k8s-base
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/ifbreadgood/k8s-base
+      targetRevision: HEAD
+      path: manifests/cert-manager-resources
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name

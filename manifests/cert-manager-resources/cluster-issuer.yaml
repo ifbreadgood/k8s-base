@@ -17,8 +17,8 @@ spec:
             region: us-east-2
             hostedZoneID: Z06285332QCWSWF1RDQBK
             accessKeyIDSecretRef:
-              name: cert-manager-vault-secret
+              name: aws-keys
               key: access_key
             secretAccessKeySecretRef:
-              name: cert-manager-vault-secret
+              name: aws-keys
               key: secret_key
