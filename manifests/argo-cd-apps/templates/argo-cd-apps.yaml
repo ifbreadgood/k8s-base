@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: &name argo-cd-apps
+  namespace: *name
+spec:
+  source:
+    repoURL: https://github.com/ifbreadgood/k8s-base
+    targetRevision: HEAD
+    path: manifests/argo-cd-apps
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: *name
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s
+        factor: 2
+        maxDuration: 3m

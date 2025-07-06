@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: &name cert-manager
+  namespace: *name
+spec:
+  source:
+    repoURL: https://charts.jetstack.io
+    chart: *name
+    targetRevision: v1.18.2
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: *name
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s
+        factor: 2
+        maxDuration: 3m
