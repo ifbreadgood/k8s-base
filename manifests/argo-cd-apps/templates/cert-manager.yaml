@@ -2,12 +2,17 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: &name cert-manager
-  namespace: *name
 spec:
   source:
-    repoURL: https://charts.jetstack.io
-    chart: *name
-    targetRevision: v1.18.2
+    - repoURL: https://charts.jetstack.io
+      chart: *name
+      targetRevision: v1.18.2
+      helm:
+        valueFiles:
+          - $values/manifests-values/cert-manager/values.yaml
+    - repoURL: https://github.com/ifbreadgood/k8s-base
+      targetRevision: HEAD
+      ref: values
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name

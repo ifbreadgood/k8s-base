@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: &name argo-cd-apps
-  namespace: *name
+  name: argo-cd-apps
 spec:
   source:
     repoURL: https://github.com/ifbreadgood/k8s-base
@@ -10,7 +9,7 @@ spec:
     path: manifests/argo-cd-apps
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: *name
+    namespace: argo-cd
   project: default
   syncPolicy:
     automated:

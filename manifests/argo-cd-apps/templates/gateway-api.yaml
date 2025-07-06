@@ -1,21 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: &name argo-cd
+  name: gateway-api
 spec:
-  sources:
-    - repoURL: oci://ghcr.io/argoproj/argo-helm/argo-cd
-      chart: *name
-      targetRevision: 8.1.2
-      helm:
-        valueFiles:
-          - $values/manifests-values/argo-cd/values.yaml
-    - repoURL: https://github.com/ifbreadgood/k8s-base
-      targetRevision: HEAD
-      ref: values
+  source:
+    repoURL: https://github.com/kubernetes-sigs/gateway-api
+    targetRevision: v1.2.1
+    path: config/crd/standard
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: *name
+    namespace: argo-cd
   project: default
   syncPolicy:
     automated:
