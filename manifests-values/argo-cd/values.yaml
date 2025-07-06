@@ -103,5 +103,5 @@ configs:
       issuer: $oidc:issuer
       clientID: $oidc:client-id
       enablePKCEAuthentication: true
-#        requestedScopes: ["openid", "profile", "email", "groups"]
+      requestedScopes: ["openid", "profile", "email"]
 #        requestedIDTokenClaims: {"groups": {"essential": true}}
