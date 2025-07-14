@@ -51,5 +51,5 @@ resource "helm_release" "this" {
   create_namespace = true
   atomic           = true
   timeout          = 5 * 60
-  values           = [file("${var.repo_root_path}/manifests-values/cilium/values.yaml")]
+  values           = [file("${var.repo_root_path}/kubernetes/helm-values/cilium/values.yaml")]
 }
