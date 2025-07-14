@@ -30,7 +30,7 @@ metadata:
 spec:
   vault:
     server: https://vault.trial.studio
-    path: int/sign/trialstudio
+    path: pki_int/sign/trialstudio
     auth:
       kubernetes:
         role: cert-manager
