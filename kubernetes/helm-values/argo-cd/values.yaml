@@ -48,7 +48,10 @@ configs:
     policy.default: ''
     policy.csv: |
       g, site-reliability-engineer, role:admin
+      g, admin, role:admin
+      g, devops, role:admin
       g, developer, role:readonly
+      g, engineers, role:readonly
     scopes: "[groups]"
 
   params:
