@@ -14,3 +14,4 @@ cluster:
               - unrestricted
               - kube-prometheus-stack
               - grafana-alloy
+              - vector
