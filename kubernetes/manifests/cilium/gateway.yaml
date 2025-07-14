@@ -4,7 +4,7 @@ metadata:
   name: trial-studio-gateway
   annotations:
     cert-manager.io/cluster-issuer: vault
-    cert-manager.io/private-key-algorithm: Ed25519
+    cert-manager.io/private-key-algorithm: ECDSA
     cert-manager.io/duration: "336h" # 2 weeks
 spec:
   gatewayClassName: cilium
