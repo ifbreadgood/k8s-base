@@ -12,9 +12,9 @@ inputs = {
 
 dependencies {
   paths = [
-    "../vm/controller",
-    "../vm/worker-1",
-    "../vm/worker-2",
-    "../vm/worker-3"
+    "../vm-controller",
+    "../vm-worker-1",
+    "../vm-worker-2",
+    "../vm-worker-3"
   ]
 }
