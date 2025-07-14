@@ -4,8 +4,8 @@ metadata:
   name: &name gateway-api
 spec:
   source:
-    repoURL: https://github.com/kubernetes-sigs/gateway-api/tree/v1.2.1
-    targetRevision: v1.2.1
+    repoURL: https://github.com/kubernetes-sigs/gateway-api
+    ref: v1.2.1
     path: config/crd/standard
   destination:
     server: "https://kubernetes.default.svc"
