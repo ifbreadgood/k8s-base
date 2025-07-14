@@ -5,6 +5,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: vault
     cert-manager.io/private-key-algorithm: Ed25519
+    cert-manager.io/duration: "14d"
 spec:
   gatewayClassName: cilium
   listeners:
