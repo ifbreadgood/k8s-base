@@ -34,7 +34,7 @@ spec:
     auth:
       kubernetes:
         role: cert-manager
-        mountPath: kubernetes
+        mountPath: /v1/auth/kubernetes
         serviceAccountRef:
           name: vault-cert-manager
           audiences:
