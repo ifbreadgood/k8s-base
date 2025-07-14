@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd-apps
+  name: cluster-infrastructure
 spec:
   source:
     repoURL: https://github.com/ifbreadgood/k8s-base
     targetRevision: HEAD
-    path: kubernetes/helm-apps/argo-cd-apps
+    path: kubernetes/argo-cd
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argo-cd

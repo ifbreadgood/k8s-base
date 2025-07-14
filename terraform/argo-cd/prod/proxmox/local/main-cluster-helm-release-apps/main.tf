@@ -42,7 +42,7 @@ variable "namespace" {
 }
 
 resource "helm_release" "this" {
-  chart            = "${var.repo_root_path}/manifests/${var.name}"
+  chart            = "${var.repo_root_path}/kubernetes/${var.name}"
   name             = var.name
   namespace        = var.namespace
   create_namespace = true
