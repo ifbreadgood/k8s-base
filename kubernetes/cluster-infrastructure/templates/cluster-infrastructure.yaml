@@ -6,7 +6,7 @@ spec:
   source:
     repoURL: https://github.com/ifbreadgood/k8s-base
     targetRevision: HEAD
-    path: kubernetes/argo-cd
+    path: kubernetes/cluster-infrastructure
   destination:
     server: "https://kubernetes.default.svc"
     namespace: argo-cd

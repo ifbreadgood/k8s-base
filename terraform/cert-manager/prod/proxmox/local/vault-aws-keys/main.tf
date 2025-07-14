@@ -53,6 +53,9 @@ resource "vault_policy" "this" {
     path "${vault_aws_secret_backend_role.this.backend}/creds/${vault_aws_secret_backend_role.this.name}" {
       capabilities = ["read"]
     }
+    path "pki_int/*" {
+      capabilities = ["read"]
+    }
     EOT
 }
 

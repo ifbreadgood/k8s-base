@@ -7,11 +7,11 @@ terraform {
 }
 
 inputs = {
-  name = "controller"
-  node_name = "px"
-  cpu = 2
-  memory = 8096
-  iso = "talos-metal-amd64-v1.10.5.iso"
+  name        = "controller"
+  node_name   = "px"
+  cpu         = 2
+  memory      = 8096
+  iso         = "talos-metal-amd64-v1.10.5.iso"
   volume_size = 25
   ip = {
     address = "dhcp"

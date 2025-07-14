@@ -44,5 +44,5 @@ resource "helm_release" "this" {
   create_namespace = true
   atomic           = true
   timeout          = 5 * 60
-  values = [file("${var.repo_root_path}/kubernetes/helm-values/argo-cd/values.yaml")]
+  values           = [file("${var.repo_root_path}/kubernetes/helm-values/argo-cd/values.yaml")]
 }

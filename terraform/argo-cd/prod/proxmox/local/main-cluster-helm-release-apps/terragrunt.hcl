@@ -15,5 +15,5 @@ inputs = {
   kube_config    = dependency.talos.outputs.kube_config
   repo_root_path = get_path_to_repo_root()
   name           = "cluster-infrastructure"
-  namespace = "argo-cd"
+  namespace      = "argo-cd"
 }

@@ -1,21 +1,21 @@
 locals {
-  path = regex("(?P<application>[^/]+)/(?P<environment>[^/]+)/(?P<platform>[^/]+)/(?P<location>[^/]+)/(?P<rest>[^/]+).*", path_relative_to_include())
-  project = "kubernetes"
+  path        = regex("(?P<application>[^/]+)/(?P<environment>[^/]+)/(?P<platform>[^/]+)/(?P<location>[^/]+)/(?P<rest>[^/]+).*", path_relative_to_include())
+  project     = "kubernetes"
   application = local.path.application
   environment = local.path.environment
-  platform = local.path.platform
-  location = local.path.location
-  rest = local.path.rest
+  platform    = local.path.platform
+  location    = local.path.location
+  rest        = local.path.rest
   default_tags = {
-    project = "kubernetes"
+    project     = "kubernetes"
     application = local.path.application
     environment = local.environment
-    platform = local.platform
-    location = local.location
-    rest = local.rest
+    platform    = local.platform
+    location    = local.location
+    rest        = local.rest
   }
   path_from_include = path_relative_from_include()
-  path_to_include = path_relative_to_include()
+  path_to_include   = path_relative_to_include()
 }
 
 generate "backend" {

@@ -15,6 +15,6 @@ inputs = {
   kube_config    = dependency.talos.outputs.kube_config
   repo_root_path = get_path_to_repo_root()
   name           = "cilium"
-  repository = "https://helm.cilium.io"
-  chart_version = "1.17.5"
+  repository     = "https://helm.cilium.io"
+  chart_version  = "1.17.5"
 }

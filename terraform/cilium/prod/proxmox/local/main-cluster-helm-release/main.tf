@@ -45,7 +45,7 @@ variable "chart_version" {
 resource "helm_release" "this" {
   repository       = var.repository
   chart            = var.name
-  version = var.chart_version
+  version          = var.chart_version
   name             = var.name
   namespace        = var.name
   create_namespace = true

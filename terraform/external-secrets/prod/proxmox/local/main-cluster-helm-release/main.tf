@@ -39,11 +39,11 @@ variable "chart_version" {
 }
 
 resource "helm_release" "this" {
-  repository = var.repository
+  repository       = var.repository
   chart            = var.name
   name             = var.name
   namespace        = var.name
-  version = var.chart_version
+  version          = var.chart_version
   create_namespace = true
   atomic           = true
   timeout          = 5 * 60

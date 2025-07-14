@@ -15,6 +15,6 @@ inputs = {
   kube_config    = dependency.talos.outputs.kube_config
   repo_root_path = get_path_to_repo_root()
   name           = "external-secrets"
-  repository = "https://charts.external-secrets.io/"
-  chart_version = "0.18.2"
+  repository     = "https://charts.external-secrets.io/"
+  chart_version  = "0.18.2"
 }
