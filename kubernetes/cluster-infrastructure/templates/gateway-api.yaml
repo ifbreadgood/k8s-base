@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: &name gateway-api
+spec:
+  source:
+    repoURL: https://github.com/kubernetes-sigs/gateway-api/tree/v1.2.1
+    targetRevision: v1.2.1
+    path: config/crd/standard
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: *name
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s
+        factor: 2
+        maxDuration: 3m
