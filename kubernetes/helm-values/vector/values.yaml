@@ -12,7 +12,7 @@ customConfig:
     elasticsearch:
       type: elasticsearch
       inputs: [ kubernetes ]
-      endpoints: [ https://victoria-logs/insert/elasticsearch/ ]
+      endpoints: [ https://victoria-logs.trial.studio/insert/elasticsearch/ ]
       mode: bulk
       api_version: v8
       compression: gzip
