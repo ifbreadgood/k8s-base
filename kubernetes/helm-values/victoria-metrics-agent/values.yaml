@@ -40,6 +40,10 @@ config:
           regex: (.+)
           target_label: __metrics_path__
           replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+      metric_relabel_configs:
+        - source_label: container
+          regex: ''
+          action: drop
       honor_timestamps: false
     - job_name: "kubernetes-service-endpoints"
       kubernetes_sd_configs:
