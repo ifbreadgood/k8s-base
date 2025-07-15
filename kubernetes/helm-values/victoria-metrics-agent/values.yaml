@@ -1,2 +1,2 @@
 remoteWrite:
-  - url: http://victoria-metrics
+  - url: http://victoria-metrics/api/v1/write
