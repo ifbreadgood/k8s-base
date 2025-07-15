@@ -2,6 +2,9 @@ remoteWrite:
   - url: https://victoria-metrics.trial.studio/api/v1/write
 
 config:
+  global:
+    scrape_interval: 30s
+
   scrape_configs:
     - job_name: vmagent
       static_configs:
