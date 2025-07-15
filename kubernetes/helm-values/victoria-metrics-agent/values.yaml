@@ -44,6 +44,8 @@ config:
         - source_labels: [container]
           regex: ""
           action: drop
+        - action: labeldrop
+          regex: id|name
       honor_timestamps: false
     - job_name: "kubernetes-service-endpoints"
       kubernetes_sd_configs:
