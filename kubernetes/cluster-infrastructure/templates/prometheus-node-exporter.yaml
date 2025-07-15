@@ -1,18 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: &name vector
+  name: &name prometheus-node-exporter
 spec:
   sources:
-    - repoURL: https://helm.vector.dev
+    - repoURL: https://prometheus-community.github.io/helm-charts
       chart: *name
-      targetRevision: 0.44.0
-      helm:
-        valueFiles:
-          - $values/kubernetes/helm-values/vector/values.yaml
-    - repoURL: https://github.com/ifbreadgood/k8s-base
-      targetRevision: HEAD
-      ref: values
+      targetRevision: 4.47.1
   destination:
     server: "https://kubernetes.default.svc"
     namespace: *name
