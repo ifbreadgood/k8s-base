@@ -8,6 +8,17 @@ customConfig:
   sources:
     kubernetes:
       type: kubernetes_logs
+      namespace_annotation_fields.namespace_labels: ""
+      node_annotation_fields.node_labels: ""
+      pod_annotation_fields.pod_annotations: ""
+      pod_annotation_fields.pod_labels: ""
+      pod_annotation_fields.pod_ip: ""
+      pod_annotation_fields.pod_ips: ""
+      pod_annotation_fields.pod_node_name: ""
+      pod_annotation_fields.pod_owner: ""
+      pod_annotation_fields.pod_uid: ""
+      pod_annotation_fields.container_id: ""
+      pod_annotation_fields.container_image_id: ""
   sinks:
     elasticsearch:
       type: elasticsearch
