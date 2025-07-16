@@ -14,28 +14,36 @@ customConfig:
         node_labels: ""
       pod_annotation_fields:
         pod_annotations: ""
-        pod_labels: ""
         pod_ip: ""
         pod_ips: ""
+        pod_labels: ""
+        pod_namespace: ""
         pod_node_name: ""
         pod_owner: ""
         pod_uid: ""
         container_id: ""
         container_image_id: ""
+  transforms:
+    parser:
+      type: remap
+      inputs: [kubernetes]
+      source: |
+        .log = parse_json(.message) ?? .message
+        del(.message)
   sinks:
     elasticsearch:
       type: elasticsearch
-      inputs: [ kubernetes ]
+      inputs: [ parser ]
       endpoints: [ https://victoria-logs.trial.studio/insert/elasticsearch/ ]
       mode: bulk
       api_version: v8
-      compression: gzip
+      compression: zstd
       healthcheck:
         enabled: false
       request:
         headers:
-          VL-Stream-Fields: source_type,label.com.docker.compose.service
           VL-Time-Field: timestamp
+          VL-Stream-Fields: stream,kubernetes.pod_name,kubernetes.container_name
           VL-Msg-Field: message,msg,_msg,message.message,message.log
           AccountID: "0"
           ProjectID: "0"
