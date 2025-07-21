@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: &name trivy-operator
+spec:
+  sources:
+    - repoURL: https://aquasecurity.github.io/helm-charts/
+      chart: *name
+      targetRevision: 0.29.3
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: trivy-operator
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 15s
+        factor: 2
+        maxDuration: 3m
