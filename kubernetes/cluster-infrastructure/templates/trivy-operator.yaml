@@ -9,7 +9,7 @@ spec:
       targetRevision: 0.29.3
   destination:
     server: "https://kubernetes.default.svc"
-    namespace: trivy-operator
+    namespace: unrestricted
   project: default
   syncPolicy:
     automated:
